@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Ghaly | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <style>
+         :root {
+            --primary: #00f2fe;
+            --bg: #0b1120;
+            --card: rgba(255, 255, 255, 0.04);
+            --text: #ffffff;
+            --text-gray: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+        
+        .light-theme {
+            --bg: #f8fafc;
+            --card: rgba(0, 0, 0, 0.05);
+            --text: #1e293b;
+            --text-gray: #64748b;
+            --glass-border: rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            cursor: none;
+        }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            transition: 0.5s;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        
+        #cursor {
+            width: 15px;
+            height: 15px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s;
+        }
+        
+        .glass {
+            background: var(--card);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: 0.4s;
+        }
+        
+        .glass:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(11, 17, 32, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        
+        .btn-ctrl {
+            background: var(--primary);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #000;
+        }
+        
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 10%;
+        }
+        
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 4px solid var(--primary);
+            margin-bottom: 20px;
+            object-fit: cover;
+            object-position: center top;
+            image-rendering: -webkit-optimize-contrast;
+            animation: float 4s infinite;
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        section {
+            padding: 60px 10%;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 1.5rem;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .badge {
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 5px;
+            border: 1px solid var(--primary);
+            margin: 5px;
+            display: inline-block;
+            font-size: 0.85rem;
+        }
+        
+        .course-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-right: 3px solid var(--primary);
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .en .course-item {
+            border-right: none;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .social-links a {
+            color: var(--text);
+            font-size: 1.8rem;
+            transition: 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid var(--glass-border);
+        }
+        
+        .en {
+            direction: ltr;
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="cursor"></div>
+
+    <nav>
+        <div class="logo" style="font-weight:700">Ahmed <span style="color:var(--primary)">Ghaly</span></div>
+        <div class="controls">
+            <button class="btn-ctrl" onclick="toggleTheme()"><i class="fas fa-adjust"></i></button>
+            <button class="btn-ctrl" onclick="toggleLang()" id="langBtn">EN</button>
+        </div>
+    </nav>
+
+    <header>
+        <img src="ME.jpg" alt="Ahmed Ghaly" class="profile-img" onerror="this.src='https://via.placeholder.com/200'">
+        <h1 id="h-name" style="font-size: 2.8rem;">أحمد غالي | <span>Ahmed Ghaly</span></h1>
+        <p id="h-sub" style="color: var(--primary); font-weight: 600; margin-top: 10px;">طالب بالصف الثاني الثانوي | مبرمج مستقبلي</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/share/1LRr2x5Y5n/"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/bn_ghaly"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@bn_ghaly"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </header>
+
+    <section>
+        <div class="glass">
+            <h2 class="section-title"><i class="fas fa-user-astronaut"></i> <span id="t-about">من أنا؟</span></h2>
+            <p id="p-about">أنا أحمد غالي، طالب طموح وشغوف بعالم التكنولوجيا. بدأت رحلتي بدافع الفضول لفهم كيف تعمل الأشياء، وتحول هذا الفضول إلى شغف حقيقي بالتعلم والتجربة. أؤمن أن البرمجة ليست مجرد كود، بل طريقة تفكير لتحليل المشكلات وتحويل الأفكار إلى واقع.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="grid-2">
+            <div class="glass">
+                <h2 class="section-title"><i class="fas fa-bullseye"></i> <span id="t-goal">أهدافي</span></h2>
+                <p id="p-goal">بناء مسار مهني قوي في مجالات التكنولوجيا الحديثة، خاصة تطوير الويب، علوم البيانات، والذكاء الاصطناعي. أعمل على تقوية الأساس البرمجي وتطوير مهارات JavaScript و C++ و C++ OOP.</p>
+            </div>
+            <div class="glass">
+                <h2 class="section-title"><i class="fas fa-laptop-code"></i> <span id="t-skills">المهارات</span></h2>
+                <div id="skills-badges">
+                    <span class="badge">HTML</span> <span class="badge">JavaScript</span> <span class="badge">C++</span>
+                    <span class="badge">OOP</span> <span class="badge">AI Basics</span> <span class="badge">Data Science</span>
+                    <span class="badge">Problem Solving</span> <span class="badge">Self Learning</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title"><i class="fas fa-graduation-cap"></i> <span id="t-edu">التعليم والكورسات</span></h2>
+        <div class="grid-2">
+            <div class="glass course-item">
+                <h4 style="color:var(--primary)">مبادرة أشبال مصر الرقمية (DECI)</h4>
+                <p id="c1">الدفعة الرابعة - المستوى التخصصي</p>
+            </div>
+            <div class="glass course-item">
+                <h4 style="color:var(--primary)">iSchool</h4>
+                <p id="c2">كورس متخصص في علوم البيانات (Data Science)</p>
+            </div>
+            <div class="glass course-item">
+                <h4 style="color:var(--primary)">Hawaii & HP Platforms</h4>
+                <p id="c3">كورسات متقدمة في الذكاء الاصطناعي (AI)</p>
+            </div>
+            <div class="glass course-item">
+                <h4 style="color:var(--primary)">Unix Platform</h4>
+                <p id="c4">كورس تطوير مهارات اللغة الإنجليزية</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="grid-2">
+            <div class="glass">
+                <h2 class="section-title"><i class="fas fa-heart"></i> <span id="t-values">القيم</span></h2>
+                <ul style="list-style:none; line-height: 2.2;" id="p-values">
+                    <li><i class="fas fa-check-circle" style="color:var(--primary)"></i> الاستمرارية أهم من السرعة.</li>
+                    <li><i class="fas fa-check-circle" style="color:var(--primary)"></i> التعلم العملي يتفوق على الحفظ.</li>
+                    <li><i class="fas fa-check-circle" style="color:var(--primary)"></i> الأخطاء جزء أساسي من التطور.</li>
+                </ul>
+            </div>
+            <div class="glass">
+                <h2 class="section-title"><i class="fas fa-dumbbell"></i> <span id="t-extra">خارج البرمجة</span></h2>
+                <p id="p-extra">التدريب في الجيم لبناء نمط حياة صحي، القراءة لتوسيع المدارك، والعمل الدائم على تحسين المهارات الشخصية مثل إدارة الوقت والانضباط.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p id="footer-text">تواصل معي: 123ahmedghaly123@gmail.com <br> مصمم بواسطة أحمد غالي &copy; 2025</p>
+    </footer>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+        }
+
+        let isEn = false;
+        const trans = {
+            ar: {
+                t_about: "من أنا؟",
+                p_about: "أنا أحمد غالي، طالب طموح وشغوف بعالم التكنولوجيا. بدأت رحلتي بدافع الفضول لفهم كيف تعمل الأشياء، وتحول هذا الفضول إلى شغف حقيقي.",
+                t_goal: "أهدافي",
+                p_goal: "بناء مسار مهني قوي في الويب، علوم البيانات، والذكاء الاصطناعي. أعمل على تقوية الأساس البرمجي وتطوير مهارات JS و C++.",
+                t_skills: "المهارات",
+                t_edu: "التعليم والكورسات",
+                c1: "مبادرة أشبال مصر الرقمية - الدفعة الرابعة",
+                c2: "كورس علوم البيانات من iSchool",
+                c3: "كورسات AI من Hawaii و HP",
+                c4: "كورس إنجليزي منصة Unix",
+                t_values: "القيم",
+                p_values: "<li>الاستمرارية أهم من السرعة</li><li>التعلم العملي يتفوق على الحفظ</li><li>الأخطاء جزء أساسي من التطور</li>",
+                t_extra: "خارج البرمجة",
+                p_extra: "الجيم، القراءة، وتحسين الانضباط وإدارة الوقت.",
+                f: "تواصل معي: 123ahmedghaly123@gmail.com \n مصمم بواسطة أحمد غالي © 2025"
+            },
+            en: {
+                t_about: "Who Am I?",
+                p_about: "I am Ahmed Ghaly, an ambitious student passionate about technology. My journey started with curiosity and turned into professional passion.",
+                t_goal: "My Goals",
+                p_goal: "Building a career in Web Dev, Data Science, and AI. Focusing on JS, C++, and OOP fundamentals.",
+                t_skills: "Skills",
+                t_edu: "Education & Courses",
+                c1: "DECI Initiative - 4th Batch",
+                c2: "Data Science Course by iSchool",
+                c3: "AI Courses by Hawaii & HP",
+                c4: "English Course by Unix",
+                t_values: "Values",
+                p_values: "<li>Consistency over speed</li><li>Practical learning over theory</li><li>Errors are part of growth</li>",
+                t_extra: "Outside Coding",
+                p_extra: "Gym for a healthy lifestyle, Reading, and Time Management.",
+                f: "Contact: 123ahmedghaly123@gmail.com \n Designed by Ahmed Ghaly © 2025"
+            }
+        };
+
+        function toggleLang() {
+            isEn = !isEn;
+            const l = isEn ? 'en' : 'ar';
+            document.documentElement.dir = isEn ? 'ltr' : 'rtl';
+            document.body.classList.toggle('en');
+            document.getElementById('langBtn').innerText = isEn ? 'AR' : 'EN';
+            document.getElementById('t-about').innerText = trans[l].t_about;
+            document.getElementById('p-about').innerText = trans[l].p_about;
+            document.getElementById('t-goal').innerText = trans[l].t_goal;
+            document.getElementById('p-goal').innerText = trans[l].p_goal;
+            document.getElementById('t-skills').innerText = trans[l].t_skills;
+            document.getElementById('t-edu').innerText = trans[l].t_edu;
+            document.getElementById('c1').innerText = trans[l].c1;
+            document.getElementById('c2').innerText = trans[l].c2;
+            document.getElementById('c3').innerText = trans[l].c3;
+            document.getElementById('c4').innerText = trans[l].c4;
+            document.getElementById('t-values').innerText = trans[l].t_values;
+            document.getElementById('p-values').innerHTML = trans[l].p_values;
+            document.getElementById('t-extra').innerText = trans[l].t_extra;
+            document.getElementById('p-extra').innerText = trans[l].p_extra;
+            document.getElementById('footer-text').innerText = trans[l].f;
+        }
+
+        ScrollReveal().reveal('.glass', {
+            delay: 200,
+            distance: '50px',
+            origin: 'bottom',
+            interval: 150
+        });
+    </script>
+
+</body>
+
+</html>
